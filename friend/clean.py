@@ -1,7 +1,17 @@
 import os,glob
 
 outfile=open('clean_S01E01.txt','a')
-outfile2=open('phoebe_all.txt','a')
+
+
+
+def preprocess(fname):
+	ofname="processed/"+fname
+	ofile=open(ofname,'w')
+	infile = open(fname,'r')
+	intext = infile.read()
+	textx=intext.split(':')
+	stry=" : ".join(textx)
+	ofile.write(stry)
 
 
 def allfiles(foldername):			#returns the name of all files inside the source folder. 		
@@ -14,13 +24,16 @@ def allfiles(foldername):			#returns the name of all files inside the source fol
 	os.chdir(owd)
 	return arr
 
-def extract_chandler(fname):
+def extract_chandler(fname,cname):
 	infile = open(fname,'r')
 	intext = infile.read()
 	textx=intext.split()
+	ofname=cname+'_all.txt'
+	outfile2=open(ofname,'a')
 
 	bufferx=[]
 	temp=None
+	count=0
 	for el in textx:
 		if el !=':':
 			bufferx.append(el)
@@ -32,17 +45,31 @@ def extract_chandler(fname):
 			sntx=" ".join(bufferx)
 			#print(temp,sntx)
 			if temp:
-				if temp=='Phoebe':
-					outfile2.write("Phoebe : "+sntx+'\n')
+				if temp==cname:
+					outfile2.write(cname+" : "+sntx+'\n')
+					count+=1
 				#outfile.write(temp+" : "+sntx+'\n')
 			else:
 				outfile.write(sntx+'\n')
 			temp=temp2
 			bufferx=[]
+	#print(count,"instances for",cname)
+	return(count)
 
-everyfile= allfiles('friends_scripts')
-for ef in everyfile:
-	print(ef)
-	newfname="friends_scripts/"+ef
-	extract_chandler(newfname)
 
+def justdoit(cname):
+	everyfile= allfiles('processed/friends_scripts')
+	countx=0
+	for ef in everyfile:
+		#print(ef)
+		newfname="processed/friends_scripts/"+ef
+		countx+=extract_chandler(newfname,cname)
+		#preprocess(newfname)
+	print(countx,"instances for",cname)
+
+#preprocess("friends_scripts/S01E01.txt")
+#extract_chandler("processed/friends_scripts/S01E01.txt")
+
+lx=['Joey','Chandler','Phoebe','Rachel','Ross','Monica']
+for el in lx:
+	justdoit(el)
