@@ -46,7 +46,7 @@ def extract_chandler(fname,cname):
 			#print(temp,sntx)
 			if temp:
 				if temp==cname:
-					outfile2.write(cname+" : "+sntx+'\n')
+					outfile2.write(sntx+'\n')
 					count+=1
 				#outfile.write(temp+" : "+sntx+'\n')
 			else:
