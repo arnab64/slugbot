@@ -1,0 +1,14 @@
+# Personality and Stylistic Scoring of Retrieved Utterances
+
+This is a project for personalizing the utterances of a conversational agent (SlugBot for UCSC). 
+
+
+### How to run the above codes?
+
+Clone the repository to your machine. 
+
+The file clean.py is for cleaning the original dataset provided. The results from the code are stored in each character file named Chandler_all.txt, Ross_all.txt etc. 
+You can run it by,
+```
+py clean.py
+```
