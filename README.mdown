@@ -12,3 +12,6 @@ You can run it by,
 ```
 py clean.py
 ```
+
+The other files available now for feature extraction are extract_pos_bigrams.py (for extracting POS bigrams)
+
