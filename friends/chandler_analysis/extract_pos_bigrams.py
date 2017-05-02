@@ -28,7 +28,7 @@ class partofspeech:
 				self.dx[el]+=1
 		return(self.dx)
 
-	def drawProgressBar(self,percent, barLen = 50):
+	def drawProgressBar(self,percent, barLen = 50):			#just a progress bar so that you dont lose patience
 	    sys.stdout.write("\r")
 	    progress = ""
 	    for i in range(barLen):
@@ -39,7 +39,7 @@ class partofspeech:
 	    sys.stdout.write("[ %s ] %.2f%%" % (progress, percent * 100))
 	    sys.stdout.flush()
 
-	def sort_and_write(self,ofname):
+	def sort_and_write(self,ofname):				#takes the POS bigrams and their counts, puts those in a list-of-list and sorts it and writes it to a file
 		ofile=open(ofname,'w')
 		lol=[]
 		for el in self.dx.keys():
@@ -50,7 +50,7 @@ class partofspeech:
 			ofile.write(strx)
 			print(gx)
 
-	def primary(self):
+	def primary(self):								#main function
 		infile = open('just_chandler.txt','r')
 		inlines=infile.readlines()
 		n=len(inlines)
