@@ -3,6 +3,10 @@
 This is a project for personalizing the utterances of a conversational agent (SlugBot for UCSC). 
 
 
+### Prerequisites
+
+For now, you need just NLTK to run the above codes. Please use Python 3.5+. 
+
 ### How to run the above codes?
 
 Clone the repository to your machine. 
