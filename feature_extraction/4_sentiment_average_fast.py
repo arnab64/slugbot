@@ -71,16 +71,23 @@ class sentiment:
 		ofile=open(self.infname,'a')
 		tpos=0
 		tneg=0
-		tlen=len(wordx)
+		#tlen=len(wordx)
+		tlen=0
 		for wrd in wordx:
 			if self.cache.get(wrd,-1)==-1:
 				rex=self.makesense(wrd)
 				ofile.write(wrd+'	'+str(rex[0])+'	'+str(rex[1])+'\n')
 			else:
 				rex=self.cache[wrd]
+
 			tpos+=float(rex[0])
 			tneg+=float(rex[1])
-		arx=[tpos/tlen,tneg/tlen]
+			if tpos+tneg!=0:
+				tlen+=1
+		try:
+			arx=[tpos/tlen,tneg/tlen]
+		else:
+			arx=[0,0]
 		return arx
 
 if __name__=='__main__':

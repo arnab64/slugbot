@@ -17,8 +17,8 @@ class partofspeech:
 	    sys.stdout.flush()
 
 	def primary(self):								#main function
-		infile = open('character_data/just_chandler.txt','r')
-		ofile = open('data_central/sentiment_scores.txt','w')
+		infile = open('character_data/just_phoebe.txt','r')
+		ofile = open('data_central/sentiment_scores_phoebe.txt','w')
 		inlines=infile.readlines()
 		n=len(inlines)
 		for k in range(n):			

@@ -1,20 +1,21 @@
 import nltk,sys
 
 class more_preprocessing:
-	def __init__(self):
-		self.infile=open('Chandler_all.txt','r')
+	def __init__(self,infname,outfname):
+		self.infile=open(infname,'r')
+		self.ofile=open(outfname,'w')
 		self.inlines=self.infile.readlines()
 
 	def remove_name(self,sentx):
 		sx=sentx.split()
 		rx=sx[2:]
-		self.removd=" ".join(rx)
-		return(self.removd)
+		removd=" ".join(rx)
+		return(removd)
 
 	def remove_desc(self,sentx):
 		comma=0
 		resx=[]
-		for chr in self.removd:
+		for chr in sentx:
 			if comma==0:
 				if chr!='(':
 					resx.append(chr)
@@ -25,7 +26,21 @@ class more_preprocessing:
 					comma=0	
 		return "".join(resx)
 
-	def drawProgressBar(self,percent, barLen = 100):
+	def remove_desc_second(self,sentx):
+		comma=0
+		resx=[]
+		for chr in sentx:
+			if comma==0:
+				if chr!='[':
+					resx.append(chr)
+				else:
+					comma=1
+			else:
+				if chr==']':
+					comma=0	
+		return "".join(resx)		
+
+	def drawProgressBar(self,percent, barLen = 50):			#just a progress bar so that you dont lose patience
 	    sys.stdout.write("\r")
 	    progress = ""
 	    for i in range(barLen):
@@ -37,19 +52,21 @@ class more_preprocessing:
 	    sys.stdout.flush()
 
 	def justdoit(self):
-		#for linex in self.inlines:
-		ofile=open('just_chandler.txt','w')
+		#ofile=open(self.outfile,'w')
 		n=len(self.inlines)
 		for k in range(n):
 			linex=self.inlines[k]
 			a=self.remove_name(linex)
-			#print(a)
 			b=self.remove_desc(a)
-			ofile.write(b+'\n')
+			c=self.remove_desc_second(b)
+			self.ofile.write(c+'\n')
 			frac=k/n
-			#print(frac)
 			self.drawProgressBar(frac)
-			#print(b)		
 
-prep=more_preprocessing()
-prep.justdoit()
+char_listx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+for el in char_listx:
+	print("\nprocessing ",el,'.....')
+	infname='character_data/'+el+'_all.txt'
+	outfname='character_data/just_'+el.lower()+'.txt'		
+	prep=more_preprocessing(infname,outfname)
+	prep.justdoit()
