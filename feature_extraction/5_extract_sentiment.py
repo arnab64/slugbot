@@ -1,7 +1,7 @@
 import nltk,sys
 import sentiment_average_fast as saf
 
-class partofspeech:
+class extract_sentiment:
 	def __init__(self):
 		self.dx={}	
 
@@ -16,9 +16,9 @@ class partofspeech:
 	    sys.stdout.write("[ %s ] %.2f%%" % (progress, percent * 100))
 	    sys.stdout.flush()
 
-	def primary(self):								#main function
-		infile = open('character_data/just_phoebe.txt','r')
-		ofile = open('data_central/sentiment_scores_phoebe.txt','w')
+	def primary(self,infname,outfname):								#main function
+		infile = open(infname,'r')
+		ofile = open(outfname,'w')
 		inlines=infile.readlines()
 		n=len(inlines)
 		for k in range(n):			
@@ -29,5 +29,10 @@ class partofspeech:
 			frac=k/n
 			self.drawProgressBar(frac)
 
-posx=partofspeech()
-posx.primary()
+posx=extract_sentiment()
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+for el in lx:
+	print("Processing",el,".....")
+	infname='character_data/just_'+el.lower()+'.txt'
+	outfname='data_central/sentiment_scores_'+el.lower()+'.txt'
+	posx.primary(infname,outfname)

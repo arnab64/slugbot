@@ -9,7 +9,7 @@ class sentiment:
 		self.cache={}
 		if infile:
 			if progress:
-				print("Loading sentiment cache .....")
+				print("\nLoading sentiment cache .....")
 			inlines=infile.readlines()
 			lenx=len(inlines)
 			countx=0

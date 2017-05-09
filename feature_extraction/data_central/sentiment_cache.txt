@@ -18241,3 +18241,10 @@ flimsy	0.0	0.21875
 waterpipe	0	0
 licorice	0.0	0.0
 suprisingly	0	0
+Kristindoes	0	0
+pretz	0	0
+ladywhoa	0	0
+YeahOK	0	0
+Ido	0.0	0.0
+Andit's	0	0
+havehi	0	0
