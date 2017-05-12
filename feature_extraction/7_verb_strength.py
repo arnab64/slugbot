@@ -6,11 +6,11 @@ import sys, os
 
 class verb_strength:
 	def __init__(self):
-		self.infile=open('character_data/just_chandler.txt','r')
+		self.infile=open('character_data/just_rachel.txt','r')
 		self.inlines=self.infile.readlines()
 		self.verblist=['VB','VBZ','VBD','VBN','VBP']
 		self.saff=saf.sentiment()
-		self.ofile=open('data_central/verb_strength_chandler.txt','w')
+		self.ofile=open('data_central/verb_strength_rachel.txt','w')
 
 	def extract_verbs(self,text):
 		txt1=word_tokenize(text)
