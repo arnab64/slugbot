@@ -22,9 +22,9 @@ for el in listx:
 	#ofile_mean.write()
 '''
 
-ch_0,ch_1=extract_find('Chandler')		#ch_0 is mean, ch_1 is standard deviation
+def test_accuracy(cname):
+	ch_0,ch_1=extract_find(cname)		#ch_0 is mean, ch_1 is standard deviation
 
-def test_accuracy():
 	fin=open('data_central/testing.txt','r')
 	ofile=open('data_central/chandler_zscore_results.txt','w')
 	flines=fin.readlines()
@@ -44,11 +44,18 @@ def test_accuracy():
 	cx=0
 	for p in range(1000):
 		thix=results[p]
-		if thix[1]=='Chandler':
+		if thix[1]==cname:
+			thix=results[p]
 			cx+=1
-	print(cx,"out of 1000 extracted!\n")
+	print(cname,":	",cx,"out of 1000 extracted!\n")
 	for el in results:
 		#print(el)
 		ofile.write(str(el)+'\n')
 
-test_accuracy()
+for el in listx:
+	print(el,"	",extract_find(el))
+print("\n\n")
+listy=['Chandler','Joey','Rachel']
+for el in listy:
+	#print(el)
+	test_accuracy(el)
