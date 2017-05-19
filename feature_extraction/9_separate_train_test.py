@@ -6,17 +6,31 @@ class traintest:
 		self.train=[]
 		self.test=[]
 		self.cnames=cnames
+		self.ofiles=[]
+		for j in range(len(self.cnames)):
+			tfname='data_central/train_test/train_'+self.cnames[j].lower()+'.txt'
+			pf=open(tfname,'w')
+			self.ofiles.append(pf)
 		self.instx=instx
-		self.train_ofile=open('data_central/training.txt','w')
-		self.test_ofile=open('data_central/testing.txt','w')
+		self.train_ofile=open('data_central/train_test/training_sec.txt','w')
+		self.test_ofile=open('data_central/train_test/testing_sec.txt','w')
 
-	def prinitit(self):
-		self.train_ofile.write("ID,pos_sentiment,neg_sentiment,pos_verb,neg_verb\n")
-		self.test_ofile.write("ID,pos_sentiment,neg_sentiment,pos_verb,neg_verb\n")		
-		for j in range(len(self.train)):
-			self.train_ofile.write(str(j+1)+','+self.train[j]+'\n')
+	def prinitit(self,separate=True):
+		#self.train_ofile.write("ID,pos_sentiment,neg_sentiment,pos_verb,neg_verb\n")
+		#self.test_ofile.write("ID,pos_sentiment,neg_sentiment,pos_verb,neg_verb\n")		
+		if separate==False:
+			for j in range(len(self.train)):
+				self.train_ofile.write(str(j+1)+','+self.train[j]+'\n')
+		else:
+			for j in range(len(self.train)):
+				spx=self.train[j].split(',')
+				character=spx[-1]
+				toprint=",".join(spx[:-1])
+				indxxx=self.cnames.index(character)
+				self.ofiles[indxxx].write(str(j+1)+','+toprint+'\n')
+
 		for k in range(len(self.test)):
-			self.test_ofile.write(str(k+1)+','+self.test[k]+'\n')
+			self.test_ofile.write(str(k+1)+','+self.test[k]+'\n')	
 
 	def processfiles(self):
 		arrx=[]
@@ -25,6 +39,7 @@ class traintest:
 			fname='data_central/combined_'+el.lower()+'.txt'
 			filex=open(fname,'r')
 			flines=filex.readlines()
+			random.shuffle(flines)
 			for k in range(len(flines)):
 				thisline=flines[k]
 				toadd=thisline[:-1]+','+el			#str(cdict[el])

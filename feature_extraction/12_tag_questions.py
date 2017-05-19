@@ -39,16 +39,14 @@ class tag_questions:
         return counter
 
     def control(self):
-        with open(self.fname, 'r') as csvfile:
-            reader = csv.reader(csvfile,delimiter=',')
-            #print(len(reader))
-            for row in reader:            #inlines:
-                #print(row)
-                if len(row)!=0:
-                    scr=self.tagq(row[0])
-                    self.ofile.write(str(scr)+'\n')
-                else:
-                    self.ofile.write(str(0)+'\n')
+        infile=open(self.fname,'r')
+        inlines=infile.readlines()
+        count=0
+        for line in inlines:            #inlines:
+            count+=1
+            scr=self.tagq(line)   
+            self.ofile.write(str(scr)+'\n')
+        print("count=",count)
 
 lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 for el in lx:

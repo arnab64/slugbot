@@ -1,12 +1,10 @@
 import word_category_counter as wc
 import csv, os, sys
 
-
-def read_csv(f):
-	with open(f, 'r') as csvfile:
-		reader = csv.DictReader(csvfile)
-		return list(reader)
-
+def read_file(f):
+	infile=open(f,'r')
+	inlines=infile.readlines()
+	return inlines
 
 def write_csv(filename, rows, header_fields=None):
     with open(filename, 'w') as csvfile:
@@ -17,30 +15,48 @@ def write_csv(filename, rows, header_fields=None):
             writer.writerow(row)
 
 
-def get_liwc_scores(wc, rows, col_name):
+def get_liwc_scores(wc, rows):
 	categories = set()
 	all_scores = []
-	for row in rows:
-		liwc_scores = wc.score_text(row[col_name])
+	count=0
+	#print(len(rows))
+	for sent in rows:
+		count+=1
+		liwc_scores = wc.score_text(sent)
 		categories |= set(liwc_scores.keys())
+	#print("counted",count)
 	category_list = sorted(list(categories))
-	for row in rows:
-		liwc_scores = wc.score_text(row[col_name])
+	count2=0
+	for sent in rows:
+		liwc_scores = wc.score_text(sent)
 		#print(liwc_scores)
-		all_scores += [[row[col_name]] + [liwc_scores.get(category, 0.0) for category in category_list]]
+		#all_scores += [[row[col_name]] + [liwc_scores.get(category, 0.0) for category in category_list]]
 		#print(all_scores)
+		all_scores += [[liwc_scores.get(category, 0.0) for category in category_list]]
+		#print(all_scores)
+		#print(all_scores)
+		count2+=1
+	print("count2=",count2)
 	return all_scores, category_list
 
 
-def main():
-	ip_filename = sys.argv[1]
-	col_name = sys.argv[2]
-	op_filename = sys.argv[3]
+def main(infname,outfname):
+	#ip_filename = sys.argv[1]
+	#col_name = sys.argv[2]
+	#op_filename = sys.argv[3]
 
+	ip_filename = infname
+	#col_name = colname
+	op_filename = outfname
 	wc.load_dictionary(wc.default_dictionary_filename())
-
-	ip_rows = read_csv(ip_filename)
-	ip_scores, category_list = get_liwc_scores(wc, ip_rows, col_name)
+	ip_rows = read_file(ip_filename)
+	ip_scores, category_list = get_liwc_scores(wc, ip_rows)
 	write_csv(op_filename, ip_scores, ["text"] + category_list)
 
-main()
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+#lx=['Chandler']
+for el in lx:
+    print("Processing....",el)
+    infname='character_data/just_'+el.lower()+'.txt'
+    outfname='intermediate/liwc_'+el.lower()+'.csv'
+    main(infname,outfname)
