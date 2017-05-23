@@ -33,6 +33,6 @@ posx=extract_sentiment()
 lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 for el in lx:
 	print("Processing",el,".....")
-	infname='character_data/just_'+el.lower()+'.txt'
+	infname='character_data/justtwo_'+el.lower()+'.txt'
 	outfname='data_central/sentiment_scores_'+el.lower()+'.txt'
 	posx.primary(infname,outfname)

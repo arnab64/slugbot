@@ -1,0 +1,9 @@
+File Name,Text,Marked Text,LIWC,MPQA,AFINN,Connotation,Consensus
+1,I am happy,I am LP_MP_CP_AP_happy,pos,pos,pos,pos,pos
+2,I am sad,I am LN_MN_CN_AN_sad,neg,neg,neg,neg,neg
+3,His speech was acrimonious,His CP_speech was MN_AN_acrimonious,neutral,neg,neg,pos,neg
+4,They kept hitting me,They CP_kept CN_hitting CP_CN_me,neutral,neutral,neutral,neutral,neutral
+5,I really like birthday cake,I CP_really MP_CP_AP_like CP_birthday CP_cake,neutral,pos,pos,pos,pos
+6,I had the best time at the zoo today,I had the LP_MP_CP_AP_best CP_time at the CN_zoo CN_today,pos,pos,pos,neutral,pos
+7,Going to the dentist is the worst,Going to the CP_CN_dentist is the LN_MN_CN_AN_worst,neg,neg,neg,neg,neg
+8,I just love it when I trip and fall down,I MP_CP_just LP_MP_CP_AP_love CN_it when I trip CP_and MN_CN_fall MN_CN_down,pos,neutral,pos,neutral,none

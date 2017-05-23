@@ -5,12 +5,13 @@ from nltk import word_tokenize
 import sys, os
 
 class verb_strength:
-	def __init__(self):
-		self.infile=open('character_data/just_rachel.txt','r')
+	def __init__(self,infname,outfname):
+		#infname='character_data/justtwo_'+name+'.txt'
+		self.infile=open(infname,'r')
 		self.inlines=self.infile.readlines()
 		self.verblist=['VB','VBZ','VBD','VBN','VBP']
 		self.saff=saf.sentiment()
-		self.ofile=open('data_central/verb_strength_rachel.txt','w')
+		self.ofile=open(outfname,'w')
 
 	def extract_verbs(self,text):
 		txt1=word_tokenize(text)
@@ -80,5 +81,10 @@ class verb_strength:
 		print("\nverb_strength_negative",neg_scr/count)
 		'''
 
-vs=verb_strength()
-vs.all_sentiment()
+lx=['Monica']	#,'Phoebe','Ross','Chandler','Joey','Rachel']
+for el in lx:
+	print("\nProcessing",el,".....")
+	infname='character_data/justtwo_'+el.lower()+'.txt'
+	outfname='data_central/verb_strength_'+el.lower()+'.txt'
+	vs=verb_strength(infname,outfname)
+	vs.all_sentiment()

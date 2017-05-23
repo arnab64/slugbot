@@ -25,21 +25,27 @@ class remspace:
     def engine(self):
         with open(self.infile,"r") as f:
             reader = csv.reader(f)          #reading using CSV reader coz numpy doesn't read text 
-            #row=next(reader)                #skip the first row
-            count=0
+            row=next(reader)                #skip the first row
+            #print(len(row))
+            self.writeit(row[1:])
             for k in range(self.lenx):
                 row=next(reader)
+                #xx=row.split(',')
+                #print(len(row))
+                #print("len=",len(xx))
                 if len(row)==0:
                     continue;
                 else:
-                    row=row[1:]
+                    #row=row[1:]
                     self.writeit(row)
-                count+=1
             #drawProgressBar(count/13042)
 
 
-lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
-nos=[13052,11436,14138,13044,12958,14624]
+#lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+#nos=[6138,5630,6748,6404,6416,7106]
+
+lx=['Chandler','Joey','Rachel']
+nos=[6405,6417,7107]
 for j in range(len(lx)):
     el=lx[j]
     print("Processing....",el)

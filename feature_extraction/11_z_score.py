@@ -18,7 +18,8 @@ def test_accuracy(cname):				#performs the operation for the cname character
 	ofname='data_central/z_'+cname+'.txt'
 	ofile=open(ofname,'w')
 	fin=open('data_central/testing_sec.txt','r')
-	ofile=open('data_central/chandler_zscore_results.txt','w')			#outputfile
+	ofname='data_central/'+cname+'_zscores.txt'	
+	#ofile=open('data_central/chandler_zscore_results.txt','w')			#outputfile
 	flines=fin.readlines()
 	results=[]
 	for j in range(1,len(flines)):			#for all the lines
@@ -29,7 +30,7 @@ def test_accuracy(cname):				#performs the operation for the cname character
 		charx=char[:-1]		#strip
 		seq=""
 		z_total=0
-		for k in range(1,lenx-1):			#for each attribute
+		for k in range(1,lenx-5):			#for each attribute
 			lol=float(itx[k])				#get the float
 			z_scr=(lol-ch_0[k-1])/ch_1[k-1]	
 			if k!=lenx-2:
@@ -38,9 +39,9 @@ def test_accuracy(cname):				#performs the operation for the cname character
 			else:
 				seq+='\n'
 			z_total+=z_scr
-		print(seq)
-		z_avg+=z_scr
-		ofile.write(seq)
+		#print(seq)
+		z_avg=z_total/(lenx-2)
+		ofile.write(seq+charx+'\n')
 		tupx=(j,charx,abs(z_avg))
 		#print(tupx)
 		results.append(tupx)
@@ -62,9 +63,7 @@ for el in listx:
 	#ofile_mean.write(a)
 	#ofile_mean.write()
 
-'''
 listy=['Chandler','Joey','Rachel']
 for el in listy:
 	#print(el)
 	test_accuracy(el) 
-'''

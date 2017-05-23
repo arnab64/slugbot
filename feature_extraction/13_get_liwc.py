@@ -57,6 +57,6 @@ lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 #lx=['Chandler']
 for el in lx:
     print("Processing....",el)
-    infname='character_data/just_'+el.lower()+'.txt'
+    infname='character_data/justtwo_'+el.lower()+'.txt'
     outfname='intermediate/liwc_'+el.lower()+'.csv'
     main(infname,outfname)
