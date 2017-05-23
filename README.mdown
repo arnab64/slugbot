@@ -3,8 +3,9 @@
 This is a project for personalizing the utterances of a conversational agent (SlugBot for UCSC). 
 
 ### Work done
-..* Unordered sub-list.
-..* Unordered sub-list.
+* Extracted utterances of characters from Friends and The Big Bang Theory.
+* Extracted LIWC, n-gram, POS features from utterances.
+* Trained and tested a classification model in the extracted features.
 
 
 ### Prerequisites
