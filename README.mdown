@@ -2,12 +2,16 @@
 
 This is a project for personalizing the utterances of a conversational agent (SlugBot for UCSC). 
 
+### Work done
+..* Unordered sub-list.
+..* Unordered sub-list.
+
 
 ### Prerequisites
 
 For now, you need just NLTK to run the above codes. Please use Python 3.5+. 
 
-### How to run the above codes?
+### How to run the above codes? (Will provide a detailed guide later )
 
 Clone the repository to your machine. 
 
