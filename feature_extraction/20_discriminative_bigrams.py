@@ -24,10 +24,10 @@ class discriminative:
 			else:
 				self.pool[elx[0]].append(float(elx[1]))				
 
-	def print_bigrams(self,top=10):
+	def print_bigrams(self,top):
 		bigs=[]
-		ofile1=open('intermediate/bigram_relative_frequencies.txt','w')
-		ofile2=open('intermediate/discriminative_bigrams.txt','w')
+		ofile1=open('intermediate/tbbt_bigram_relative_frequencies.txt','w')
+		ofile2=open('intermediate/tbbt_discriminative_bigrams.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
@@ -36,7 +36,8 @@ class discriminative:
 		bigs.sort(key=lambda tup: tup[1],reverse=True)
 		print("numbers are:",len(bigs))
 		count=0
-		for j in range(len(bigs)):
+		print("selecting the top 1000")
+		for j in range(1000):	#len(bigs)):
 			holx=bigs[j]
 			bigr=holx[0]
 			bigt=holx[1]
@@ -47,8 +48,9 @@ class discriminative:
 			count+=1
 
 obj=discriminative()
-lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+lx=['Raj','Leonard','Sheldon','Penny','Bernadette','Amy']
+#lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 for el in lx:
 	inf='intermediate/cbigrams_'+el.lower()+'.txt'
 	obj.extractbigrams(inf)
-obj.print_bigrams(top=15)
+obj.print_bigrams(1000)

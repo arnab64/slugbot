@@ -48,9 +48,10 @@ class bigrams:
         for key in self.dx.keys():
             self.lx.append((key,self.dx[key]))
         self.lx.sort(key=lambda tup: tup[1],reverse=True)
+        lenx=len(self.lx)
         for itx in self.lx[:25]:
             itxx=itx[0]
-            self.ofile.write(itxx[0]+'	'+itxx[1]+'	'+str(itx[1])+'\n')
+            self.ofile.write(itxx[0]+'	'+itxx[1]+'	'+str(itx[1]/lenx)+'\n')
 
     def count_bigrams(self):
         writefile = open('csv_bigram.csv', 'w', newline = '')
@@ -70,7 +71,8 @@ class bigrams:
 if __name__=="__main__":
     lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
     for el in lx:
-        inf='character_data/just_'+el.lower()+'.txt'
+        print("\nprocessing....",el)
+        inf='character_data/justtwo_'+el.lower()+'.txt'
         outf='intermediate/pos_bigrams_'+el.lower()+'.txt'
         big=bigrams(inf,outf)
         big.strip_punct()

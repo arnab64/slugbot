@@ -27,7 +27,7 @@ class remspace:
             reader = csv.reader(f)          #reading using CSV reader coz numpy doesn't read text 
             row=next(reader)                #skip the first row
             #print(len(row))
-            self.writeit(row[1:])
+            #self.writeit(row[1:])
             for k in range(self.lenx):
                 row=next(reader)
                 #xx=row.split(',')
@@ -44,8 +44,15 @@ class remspace:
 #lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 #nos=[6138,5630,6748,6404,6416,7106]
 
-lx=['Chandler','Joey','Rachel']
-nos=[6405,6417,7107]
+#lx=['Chandler','Joey','Rachel','Monica','Ross','Phoebe']
+#nos=[6405,6417,7107,6139,6750,5600]
+
+lx=['Chandler','Joey','Rachel','Monica','Ross','Phoebe','Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
+nos=[6405,6417,7107,6139,6748,5631,4540,8206,13282,6442,5602,2110,2872]
+
+#lx=['Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
+#nos=[4540,8206,13282,6442,5602,2110,2872]
+
 for j in range(len(lx)):
     el=lx[j]
     print("Processing....",el)

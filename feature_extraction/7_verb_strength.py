@@ -35,7 +35,7 @@ class verb_strength:
 			lneg=tneg/count
 		except:
 			lneg=0
-		self.ofile.write(str(lpos)+"	"+str(lneg)+"\n")
+		self.ofile.write(str(lpos)+","+str(lneg)+"\n")
 		return verbs_found
 
 	def perform_all(self):
@@ -81,7 +81,7 @@ class verb_strength:
 		print("\nverb_strength_negative",neg_scr/count)
 		'''
 
-lx=['Monica']	#,'Phoebe','Ross','Chandler','Joey','Rachel']
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 for el in lx:
 	print("\nProcessing",el,".....")
 	infname='character_data/justtwo_'+el.lower()+'.txt'

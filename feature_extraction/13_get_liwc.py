@@ -2,18 +2,17 @@ import word_category_counter as wc
 import csv, os, sys
 
 def read_file(f):
-	infile=open(f,'r')
+	infile=open(f,'r',encoding="utf8")
 	inlines=infile.readlines()
 	return inlines
 
 def write_csv(filename, rows, header_fields=None):
-    with open(filename, 'w') as csvfile:
+    with open(filename, 'w', encoding="utf8") as csvfile:
         writer = csv.writer(csvfile)
         if header_fields:
             writer.writerow(header_fields)
         for row in rows:
             writer.writerow(row)
-
 
 def get_liwc_scores(wc, rows):
 	categories = set()
@@ -53,10 +52,12 @@ def main(infname,outfname):
 	ip_scores, category_list = get_liwc_scores(wc, ip_rows)
 	write_csv(op_filename, ip_scores, ["text"] + category_list)
 
-lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
-#lx=['Chandler']
+#lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+#tbbt=['Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
+
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel','Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
 for el in lx:
     print("Processing....",el)
-    infname='character_data/justtwo_'+el.lower()+'.txt'
+    infname='character_data/just_'+el.lower()+'.txt'
     outfname='intermediate/liwc_'+el.lower()+'.csv'
     main(infname,outfname)

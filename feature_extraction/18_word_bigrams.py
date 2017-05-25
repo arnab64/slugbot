@@ -4,16 +4,19 @@ import operator
 import nltk
 from nltk.util import ngrams
 from collections import Counter
+from nltk.corpus import stopwords
+
  
-class bigrams:
+class bigrams:				
 	def __init__(self,infile,outfile):
 		self.dx={}
 		self.infile=infile
 		self.outfile=outfile
+		self.stop = set(stopwords.words('english'))
 
-	def strip_punct(self):
+	def strip_punct(self):			#removes the functions
 		exclude = set(string.punctuation)	 
-		f = open(self.infile,'r')
+		f = open(self.infile,'r',encoding='utf8')
 		text = f.readlines()
 		f.close()
 		self.removed=[]
@@ -21,11 +24,17 @@ class bigrams:
 			s = text[x]
 			s = s.replace('-',' ')
 			s1 = ''.join(ch for ch in s if ch not in exclude)
+			s1=s1.lower()
 			self.removed.append(s1)
 
-	def return_bigrams(self):
+	def return_bigrams(self):		#extracts the bigrams from every line 
+		
 		for line in self.removed: 
-			token = nltk.word_tokenize(line)
+			remd=[i for i in line.split() if i not in self.stop]
+			line2=" ".join(remd)
+			token = nltk.word_tokenize(line2)
+
+			
 			bigrams = ngrams(token,2)
 			for el in bigrams:	
 				if self.dx.get(el,-1)==-1:
@@ -38,15 +47,16 @@ class bigrams:
 			if count==10:
 				break;
 
-	def sortit(self):
+	def sortit(self):				#extracts the 
 		self.ofile=open(self.outfile,'w')
 		self.lx=[]
 		for key in self.dx.keys():
 			self.lx.append((key,self.dx[key]))
 		self.lx.sort(key=lambda tup: tup[1],reverse=True)
-		for itx in self.lx[:25]:
+		lenx=len(self.lx)
+		for itx in self.lx[:1000]:
 			itxx=itx[0]
-			self.ofile.write(itxx[0]+'	'+itxx[1]+'	'+str(itx[1])+'\n')
+			self.ofile.write(itxx[0]+'	'+itxx[1]+'	'+str(itx[1]/lenx*1000)+'\n')
 
 	def count_bigrams(self):
 		writefile = open('csv_bigram.csv', 'w', newline = '')
@@ -64,9 +74,12 @@ class bigrams:
 		        fileWriter.writerow(row)
 
 if __name__=="__main__":
-	lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+	#lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+	#lx=['Sheldon']
+	lx=['Raj','Leonard','Sheldon','Penny','Bernadette','Amy']
 	for el in lx:
-		inf='character_data/justtwo_'+el.lower()+'.txt'
+		print("\n..doing..",el)
+		inf='character_data/just_'+el.lower()+'.txt'
 		outf='intermediate/cbigrams_'+el.lower()+'.txt'
 		big=bigrams(inf,outf)
 		big.strip_punct()

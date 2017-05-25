@@ -16,11 +16,6 @@ class tag_questions:
         self.verb_list = ftext.split()
         self.ofile=open(ofname,'w')
 
-    #def read_csv(self,fname):
-
-            #return list(reader)
-            #return reader
-
     def tagq(self,line):
         a=line.split()
         counter=0
