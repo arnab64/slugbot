@@ -5,7 +5,7 @@ This code knits various data files together!
 '''
 
 class knit:
-	def __init__(self,fnames,delimited,transpose,ofilename):
+	def __init__(self,fnames,ofilename):
 		'''
 		if the data is delimited with commas, then put delimited=1
 		if the data is just one column, then put transpose=1
@@ -19,15 +19,6 @@ class knit:
 			print("fnames=",fnames)
 			for j in range(len(fnames)):
 				temp=np.loadtxt(fnames[j],delimiter=',')
-				'''
-				print("trying to open",fnames[j])
-				spx=fnames[j].split('.')
-				if delimited[j]==0:
-					temp=np.loadtxt(fnames[j])	
-				elif delimited[j]==1:
-					temp=np.loadtxt(fnames[j],delimiter=',')
-				if transpose[j]==1:
-					temp=np.transpose(temp)'''
 				arrx.append(temp)
 			temp=arrx[0]
 			print("Shapes are:")
@@ -45,10 +36,10 @@ for el in listx:
 	f1='data_central/sentiment_scores_'+el.lower()+'.txt'
 	f2='data_central/verb_strength_'+el.lower()+'.txt'
 	f3='data_central/liwc_'+el.lower()+'.txt'
-	#f4='data_central/countwords_'+el.lower()+'.txt'
-	#f5='data_central/tag_questions_'+el.lower()+'.txt'
-	#f6='data_central/wbg_vectors_'+el.lower()+'.txt'
-	#f7='data_central/posb_vectors_'+el.lower()+'.txt'
+	f4='data_central/unigram_vectors_'+el.lower()+'.txt'
+	f5='data_central/bigram_vectors_'+el.lower()+'.txt'
+	f6='data_central/pos_unigram_vectors_'+el.lower()+'.txt'
+	f7='data_central/pos_bigram_vectors_'+el.lower()+'.txt'
 	of='data_central/combined_'+el.lower()+'.txt'
-	knx=knit([f1,f2,f3],[0,0,0,1],[0,0,0,0],of)
+	knx=knit([f1,f2,f3,f4,f5,f6,f7],of)
 	

@@ -28,15 +28,29 @@ class zscore:
 		for name in names:
 			self.zvectors[name]=self.compute_zvector(self.mean_vectors[name])	
 
+	def compute_mv_zdist(self):
+		self.chardx={'Chandler':[],'Joey':[],'Rachel':[]}
+		for k in range(len(self.names)):
+			name=self.names[k]
+			fname='data_central/train_test/train_'+name+'.txt'
+			#fname='data_central/_'+name+'.txt'
+			finx = np.loadtxt(fname, delimiter=",")
+			fin=finx[:,1:]
+			depth=fin.shape[0]
+			width=fin.shape[1]	
+			for j in range(depth):
+				vecx=fin[j,:]
+				self.chardx[name].append(self.zdistance(vecx))
+		for key in self.chardx.keys():
+			print(key,"mean/sd=",np.mean(self.chardx[key]),np.std(self.chardx[key]))
+
 	def print_zscores(self):
 		for name in self.names:
 			gr=self.zvectors[name]	
-			print(gr)
-			print(len(gr))
+			#print(gr)
+			#print(len(gr))
 
 	def compute_similarity_chars(self):
-		#for name in self.names:
-		#	print(self.zvectors[name])
 		lot=[]
 		ofile=open("similarity_results.txt",'w')
 		for j in range(len(self.names)):
@@ -55,6 +69,13 @@ class zscore:
 			print(el)
 			ofile.write(el[0]+"-"+el[1]+"	"+str(el[2])+"	"+str(el[3])+"\n")
 		#print(lot)
+
+	def zdistance(self,vecx):
+		subx=np.subtract(self.mnx,vecx)
+		divx=np.absolute(subx)
+		#mulx=np.multiply(divx,self.sdx)
+		sumx=np.sum(divx)
+		return sumx
 
 	def compute_zvector(self,vecx):
 		subx=np.subtract(self.mnx,vecx) 
@@ -87,7 +108,8 @@ class zscore:
 		infile=open(fname)
 		inlines=infile.readlines()
 		correct=0
-		correctdx={'Monica':0,'Phoebe':0,'Ross':0,'Chandler':0,'Joey':0,'Rachel':0}
+		#correctdx={'Monica':0,'Phoebe':0,'Ross':0,'Chandler':0,'Joey':0,'Rachel':0}
+		correctdx={'Raj':0,'Leonard':0,'Sheldon':0,'Penny':0,'Bernadette':0,'Amy':0}
 
 		for k in range(len(inlines)):	#len(inlines)):
 			this1=inlines[k]
@@ -116,11 +138,12 @@ class zscore:
 		for key in correctdx.keys():
 			print(key,correctdx[key])
 
-lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
-#lx=['Chandler','Joey','Rachel']
+#lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+lx=['Chandler','Joey','Rachel']
 #lx=['Sheldon','Penny']	#,'Leonard']
 #lx=['Chandler','Joey','Rachel','Monica','Ross','Phoebe']		
 #lx=['Raj','Leonard','Sheldon','Penny','Bernadette','Amy']
 zzz=zscore(lx)
-zzz.print_zscores()
+zzz.compute_mv_zdist()
+#zzz.print_zscores()
 #zzz.testitout()

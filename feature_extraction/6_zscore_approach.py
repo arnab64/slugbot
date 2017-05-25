@@ -10,7 +10,7 @@ class zscore:
 		self.zvectors={}
 		for k in range(len(names)):
 			name=names[k]
-			fname='data_central/train_test/tbbt_train_'+name+'.txt'
+			fname='data_central/test_train/train_'+name.lower()+'.txt'
 			finx = np.loadtxt(fname, delimiter=",")
 			fin=finx[:,1:]
 			mx=np.mean(fin,axis=0)
@@ -19,21 +19,19 @@ class zscore:
 			if k==0:
 				self.data=fin
 			else:
-				self.data=np.concatenate((self.data,fin),axis=0)
-				
+				self.data=np.concatenate((self.data,fin),axis=0)		
 		self.mnx=np.mean(self.data,axis=0)
 		self.sdx=np.std(self.data,axis=0)
+		print(self.mnx)
+		print(self.sdx)
 		for name in names:
 			self.zvectors[name]=self.compute_zvector(self.mean_vectors[name])	
 
-	def find_mean(self):
-
-	def find_standarddev(self):
-		
-
 	def print_zscores(self):
-		for name in self.names:
-			print(self.zvectors[name])
+		#for name in self.names:
+		zv1=self.zvectors['Chandler']
+		for el in zv1:
+			print(el)
 
 	def compute_zvector(self,vecx):
 		subx=np.subtract(self.mnx,vecx) 
@@ -60,47 +58,34 @@ class zscore:
 		distx=usum/(lsqrt*rsqrt)
 		return(1-distx)
 
-	def testitout(self):
-		fname='data_central/train_test/tbbt_testing_sec.txt'
+	def testitout(self,character):
+		fname='data_central/test_train/testing.txt'
 		infile=open(fname)
 		inlines=infile.readlines()
 		correct=0
-		shelcount=0
-		pennycount=0
-		leonardcount=0
-		for k in range(len(inlines)):	#len(inlines)):
+		temparr=[]
+		for k in range(5):	#len(inlines)):
 			this1=inlines[k]
 			this2=this1.split(',')
 			this3=this2[1:-1]
 			character=this2[-1].strip()
 			vect=[float(el) for el in this3]
-			zv=self.compute_zvector(vect)
-			temparr=[]
-			for name in self.names:
-				#scr1=self.cosine(self.zvectors[name],vect)
-				scr=spatial.distance.cosine(self.zvectors[name],vect)
-				#print(scr1,scr)
-				temparr.append((name,scr))
-			temparr.sort(key=lambda tup: tup[1])
-			#print(temparr)
-			predicted=temparr[0]
-			pred=predicted[0]
-			#print(pred,character)
-			if pred==character:
-				correct+=1
-				if pred=='Sheldon':
-					shelcount+=1
-				elif pred=='Penny':
-					pennycount+=1
-				elif pred=='Leonard':
-					leonardcount+=1
+			#print(len(vect)
+			zv=self.compute_zvector(vect)	
+			#for el in zv:
+			#	print(type(el))
+			print(len(zv))
+			scr=spatial.distance.cosine(self.zvectors[character],vect)
+			temparr.append((name,scr))
+		temparr.sort(key=lambda tup: tup[1])
+		#print(temparr)
 
-				#print(pred)
-		print("correct:",correct,"out of",k," / percent=",correct/(k+1)*100)		
-		print("Sheldon:",shelcount,"/ Penny:",pennycount," / Leonard:",leonardcount)	
+		#print("correct:",correct,"out of",k," / percent=",correct/(k+1)*100)		
+		#print("Sheldon:",shelcount,"/ Penny:",pennycount," / Leonard:",leonardcount)	
+
 #lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
-#lx=['Chandler','Joey','Rachel']
-lx=['Sheldon','Penny','Leonard']
+lx=['Chandler','Joey','Rachel']
+#lx=['Sheldon','Penny','Leonard']
 zzz=zscore(lx)
 zzz.print_zscores()
-zzz.testitout()
+zzz.testitout('Chandler')

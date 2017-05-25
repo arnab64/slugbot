@@ -10,7 +10,7 @@ class zscore:
 		self.zvectors={}
 		for k in range(len(names)):
 			name=names[k]
-			fname='data_central/train_test/train_'+name+'.txt'
+			fname='data_central/test_train/train_'+name+'.txt'
 			#fname='data_central/_'+name+'.txt'
 			finx = np.loadtxt(fname, delimiter=",")
 			fin=finx[:,1:]
@@ -76,7 +76,7 @@ class zscore:
 		return(1-distx)
 
 	def testitout(self):
-		fname='data_central/train_test/testing.txt'
+		fname='data_central/test_train/testing.txt'
 		infile=open(fname)
 		inlines=infile.readlines()
 		correct=0
@@ -88,6 +88,7 @@ class zscore:
 			this3=this2[1:-1]
 			character=this2[-1].strip()
 			vect=[float(el) for el in this3]
+			print(vect)
 			zv=self.compute_zvector(vect)
 			temparr=[]
 			for name in self.names:
