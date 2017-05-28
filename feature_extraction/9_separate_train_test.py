@@ -2,18 +2,18 @@ import numpy as np
 import random
 
 class traintest:
-	def __init__(self,cnames,instx=0):		
+	def __init__(self,cnames,instx=1000):		
 		self.train=[]
 		self.test=[]
 		self.cnames=cnames
 		self.ofiles=[]
 		for j in range(len(self.cnames)):
-			tfname='data_central/test_train/train_'+self.cnames[j].lower()+'.txt'
+			tfname='data_central/test_train/bigbang/train_'+self.cnames[j].lower()+'.txt'
 			pf=open(tfname,'w')
 			self.ofiles.append(pf)
 		self.instx=instx
-		self.train_ofile=open('data_central/test_train/training_first.txt','w')
-		self.test_ofile=open('data_central/test_train/testing_second.txt','w')
+		self.train_ofile=open('data_central/test_train/bigbang/training_tbbt_everything.txt','w')
+		self.test_ofile=open('data_central/test_train/bigbang/testing_tbbt_finally.txt','w')
 
 	def prinitit(self,separate=True):
 		#self.train_ofile.write("ID,pos_sentiment,neg_sentiment,pos_verb,neg_verb\n")
@@ -38,7 +38,7 @@ class traintest:
 		#cdict={'Sheldon':1,'Penny':2,'Bernadette':3,'Amy':4,'Raj':5,'Leonard':6}
 		#cdict={'Chandler':0,'Joey':1,'Rachel':2,'Ross':4,'Monica':5,'Phoebe':6}
 		for el in self.cnames:
-			fname='data_central/bigram_vectors_'+el.lower()+'.txt'
+			fname='data_central/liwc_'+el.lower()+'.txt'
 			filex=open(fname,'r',encoding='utf8')
 			flines=filex.readlines()
 			flines=flines[1:]
@@ -57,10 +57,10 @@ class traintest:
 		random.shuffle(self.test)
 		print("Training:",len(self.train))
 		print("Testing:",len(self.test))
-		self.prinitit(separate=False)
+		self.prinitit()
 
-listx=['Chandler','Joey']	#,'Rachel','Ross','Monica','Phoebe']
+#listx=['Chandler','Joey','Rachel','Ross','Monica','Phoebe']
 #listx=['Sheldon','Penny','Leonard',]
-#listx=['Sheldon','Penny','Bernadette','Amy','Raj','Leonard']
+listx=['Sheldon','Penny','Bernadette','Amy','Raj','Leonard']
 tt = traintest(listx)
 tt.processfiles()

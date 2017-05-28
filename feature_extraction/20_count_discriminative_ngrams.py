@@ -19,7 +19,7 @@ class count_ngrams:
 		self.dblist=[]
 		if ngrams==2:
 			if pos==0:
-				inf=open('intermediate/friends_discriminative_bigrams.txt',"r",encoding='utf-8',errors='ignore')
+				inf=open('intermediate/friends_discriminative_bigrams_new.txt',"r",encoding='utf-8',errors='ignore')
 			else:
 				inf=open('intermediate/friends_pos_discriminative_bigrams.txt',"r",encoding='utf-8',errors='ignore')
 		else:
@@ -140,7 +140,7 @@ if __name__=="__main__":
 	for el in lx:
 		print("\nprocessing....",el)
 		inf='character_data/just_'+el.lower()+'.txt'
-		outf='data_central/bigram_vectors_'+el.lower()+'.txt'
+		outf='data_central/bigram_vectors_new_'+el.lower()+'.txt'
 		big=count_ngrams(inf,outf,2,0)			
 		big.strip_punct()
 		big.count_bigrams()

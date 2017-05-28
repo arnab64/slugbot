@@ -16,17 +16,17 @@ class knit:
 			print("Just one file, nothing to knit!")
 		else:
 			arrx=[]
-			print("fnames=",fnames)
+			#print("fnames=",fnames)
 			for j in range(len(fnames)):
 				temp=np.loadtxt(fnames[j],delimiter=',')
 				arrx.append(temp)
 			temp=arrx[0]
-			print("Shapes are:")
-			for el in arrx:
-				print(el.shape)
+			#print("Shapes are:")
+			#for el in arrx:
+				#print(el.shape)
 			for k in range(1,len(arrx)):
 				temp=np.concatenate((temp,arrx[k]),axis=1)
-				print("shape is now",temp.shape)
+				#print("shape is now",temp.shape)
 			print(temp.shape)
 			np.savetxt(ofilename, temp, delimiter=',',fmt='%7.6f')
 
@@ -37,9 +37,9 @@ for el in listx:
 	f2='data_central/verb_strength_'+el.lower()+'.txt'
 	f3='data_central/liwc_'+el.lower()+'.txt'
 	f4='data_central/unigram_vectors_'+el.lower()+'.txt'
-	f5='data_central/bigram_vectors_'+el.lower()+'.txt'
+	f5='data_central/bigram_vectors_new_'+el.lower()+'.txt'
 	f6='data_central/pos_unigram_vectors_'+el.lower()+'.txt'
 	f7='data_central/pos_bigram_vectors_'+el.lower()+'.txt'
-	of='data_central/combined_'+el.lower()+'.txt'
+	of='data_central/combined_new_'+el.lower()+'.txt'
 	knx=knit([f1,f2,f3,f4,f5,f6,f7],of)
 	

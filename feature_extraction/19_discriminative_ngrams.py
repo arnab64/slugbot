@@ -76,16 +76,16 @@ class discriminative:
 	def print_bigrams(self):
 		bigs=[]
 		ofile1=open('intermediate/friends_bigram_relative_frequencies.txt','w')
-		ofile2=open('intermediate/friends_discriminative_bigrams_fourth.txt','w')
+		ofile2=open('intermediate/friends_discriminative_bigrams_new.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
-			bigs.append((key,np.std(elllx)))
+			bigs.append((key,np.std(elllx)*np.mean(elllx)))
 		bigs.sort(key=lambda tup: tup[1],reverse=True)
 		print("numbers are:",len(bigs))
 		count=0
 		print("selecting the top 100 discriminative!")
-		for j in range(300,400):
+		for j in range(100):
 			holx=bigs[j]
 			bigr=holx[0]
 			bigt=holx[1]
