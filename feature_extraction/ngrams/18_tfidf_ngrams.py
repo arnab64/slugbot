@@ -14,10 +14,8 @@ class bigrams:
 		self.outfile=outfile
 		self.stop = set(stopwords.words('english'))
 
-	def strip_punct(self,bigs):			#removes the functions
+	def strip_punct(self):			#removes the functions
 		exclude = set(string.punctuation)	 
-		if bigs==1:
-			exclude.discard('.')
 		f = open(self.infile,'r',encoding='utf8')
 		text = f.readlines()
 		f.close()
@@ -50,11 +48,11 @@ class bigrams:
 			
 			bigrams = ngrams(token,2)
 			for el in bigrams:
-				if el[0]!='.' and el[1]!='.':
-					if self.dx.get(el,-1)==-1:
-						self.dx[el]=1
-					else:
-						self.dx[el]+=1
+				#print("el=",el)	
+				if self.dx.get(el,-1)==-1:
+					self.dx[el]=1
+				else:
+					self.dx[el]+=1
 
 	def sortit(self):				#extracts the 
 		self.ofile=open(self.outfile,'w')
@@ -78,7 +76,7 @@ if __name__=="__main__":
 		inf='../character_data/just_'+el.lower()+'.txt'
 		outf='ngramdata/bigrams_'+el.lower()+'.txt'
 		big=bigrams(inf,outf)
-		big.strip_punct(1)
+		big.strip_punct()
 		big.return_bigrams()
 		big.sortit()
 

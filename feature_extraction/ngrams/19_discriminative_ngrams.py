@@ -7,7 +7,7 @@ class discriminative:
 		self.pool3={'Monica':[],'Phoebe':[],'Ross':[],'Chandler':[],'Joey':[],'Rachel':[]}
 
 	def extractbigrams(self,name):
-		fname='intermediate/bigrams_'+name.lower()+'.txt'
+		fname='ngramdata/bigrams_'+name.lower()+'.txt'
 		inf=open(fname,'r')
 		inl=inf.readlines()				#reading all bigrams for a character
 		for line in inl:							
@@ -21,7 +21,7 @@ class discriminative:
 				#self.pool2[(elx[0],elx[1])].append(name)
 
 	def extractunigrams(self,name):
-		fname='intermediate/cunigrams_'+name.lower()+'.txt'
+		fname='ngramdata/cunigrams_'+name.lower()+'.txt'
 		inf=open(fname,'r')
 		inl=inf.readlines()
 		for line in inl:
@@ -33,9 +33,9 @@ class discriminative:
 
 	def print_unique_bigrams(self,top):
 		bigs=[]
-		ofile1=open('intermediate/friends_unigram_relative_frequencies.txt','w')
-		ofile2=open('intermediate/friends_discriminative_unigrams_1.txt','w')
-		ofile3=open('intermediate/friends_discriminative_unigrams_2.txt','w')
+		ofile1=open('ngramdata/friends_unigram_relative_frequencies.txt','w')
+		ofile2=open('ngramdata/friends_discriminative_unigrams_1.txt','w')
+		ofile3=open('ngramdata/friends_discriminative_unigrams_2.txt','w')
 		for key in self.pool.keys():
 			#print("key=",key)
 			elllx=self.pool[key]
@@ -62,8 +62,8 @@ class discriminative:
 				ofile2.write(bigr[0]+'	'+bigr[1]+'\n')
 				count+=1
 		print(count,"unique bigrams extracted!")
+		
 		for key in self.pool3.keys():
-			#print(key,"\n",self.pool3[key])
 			ofilexxx=open("unique_"+key+".txt",'w')
 			lolx=self.pool3[key]
 			lolx.sort(key=lambda tup: tup[1])
@@ -75,8 +75,8 @@ class discriminative:
 
 	def print_bigrams(self):
 		bigs=[]
-		ofile1=open('intermediate/friends_bigram_relative_frequencies.txt','w')
-		ofile2=open('intermediate/friends_discriminative_bigrams_new.txt','w')
+		ofile1=open('ngramdata/friends_bigram_relative_frequencies.txt','w')
+		ofile2=open('ngramdata/friends_discriminative_bigrams_new.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
@@ -100,8 +100,8 @@ class discriminative:
 
 	def print_unigrams(self,top):
 		bigs=[]
-		ofile1=open('intermediate/friends_unigram_relative_frequencies.txt','w')
-		ofile2=open('intermediate/friends_discriminative_unigrams.txt','w')
+		ofile1=open('ngramdata/friends_unigram_relative_frequencies.txt','w')
+		ofile2=open('ngramdata/friends_discriminative_unigrams.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
