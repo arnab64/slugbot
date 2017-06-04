@@ -37,9 +37,9 @@ for el in listx:
 	f2='data_central/verb_strength_'+el.lower()+'.txt'
 	f3='data_central/liwc_'+el.lower()+'.txt'
 	f4='data_central/unigram_vectors_'+el.lower()+'.txt'
-	f5='data_central/bigram_vectors_new_'+el.lower()+'.txt'
-	f6='data_central/pos_unigram_vectors_'+el.lower()+'.txt'
-	f7='data_central/pos_bigram_vectors_'+el.lower()+'.txt'
+	#f5='data_central/bigram_vectors_new_'+el.lower()+'.txt'
+	#f6='data_central/pos_unigram_vectors_'+el.lower()+'.txt'
+	#f7='data_central/pos_bigram_vectors_'+el.lower()+'.txt'
 	of='data_central/combined_new_'+el.lower()+'.txt'
-	knx=knit([f1,f2,f3,f4,f5,f6,f7],of)
+	knx=knit([f1,f2,f3,f4],of)
 	

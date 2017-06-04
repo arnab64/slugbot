@@ -56,18 +56,23 @@ class bigrams:
 					else:
 						self.dx[el]+=1
 
-	def sortit(self):				#extracts the 
+	def sortit(self,unibi):				#extracts the 
 		self.ofile=open(self.outfile,'w')
 		self.lx=[]
 		for key in self.dx.keys():
 			self.lx.append((key,self.dx[key]))
 		self.lx.sort(key=lambda tup: tup[1],reverse=True)
 		lenx=len(self.lx)
-		for itx in self.lx[:1000]:			#extract just the top 1000
-			#print(itx)
-			word1=itx[0][0]
-			word2=itx[0][1]
-			self.ofile.write(word1+'	'+word2+'	'+str(itx[1]/lenx*100)+'\n')
+		if unibi==2:
+			for itx in self.lx[:1000]:			#extract just the top 1000
+				#print(itx)
+				word1=itx[0][0]
+				word2=itx[0][1]
+				self.ofile.write(word1+'	'+word2+'	'+str(itx[1]/lenx*100)+'\n')
+		else:
+			for itx in self.lx[:1000]:
+				#print(itx)
+				self.ofile.write(itx[0][0]+'	'+str(itx[1]/lenx*100)+'\n')	
 
 if __name__=="__main__":
 	lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
@@ -76,9 +81,10 @@ if __name__=="__main__":
 	for el in lx:
 		print("\n..doing..",el)
 		inf='../character_data/just_'+el.lower()+'.txt'
-		outf='ngramdata/bigrams_'+el.lower()+'.txt'
+		outf='ngramdata/unigrams_'+el.lower()+'.txt'
 		big=bigrams(inf,outf)
 		big.strip_punct(1)
-		big.return_bigrams()
-		big.sortit()
+		#big.return_bigrams()
+		big.return_unigrams()
+		big.sortit(1)
 

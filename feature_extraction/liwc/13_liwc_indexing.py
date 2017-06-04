@@ -97,7 +97,7 @@ if __name__=='__main__':
 	#reject=['Anger']
 	reject=[]
 
-	labelfile='../data_central/liwc_labels.txt'
+	labelfile='liwcfeatures/liwc_labels.txt'
 	lofile=open(labelfile,'w')
 	lofile.write(",".join(keep))
 
@@ -109,7 +109,7 @@ if __name__=='__main__':
 		el=lx[j]
 		print("Processing....",el)
 		infname='../intermediate/liwc_'+el.lower()+'.csv'
-		outfname='../data_central/liwc_'+el.lower()+'.txt'
+		outfname='liwcfeatures/liwc_'+el.lower()+'.txt'
 
 		r=remspace(infname,outfname,nos[j],featx)			#instance of classs
 		r.engine()

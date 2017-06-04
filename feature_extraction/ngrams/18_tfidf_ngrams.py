@@ -74,7 +74,7 @@ if __name__=="__main__":
 	for el in lx:
 		print("\n..doing..",el)
 		inf='../character_data/just_'+el.lower()+'.txt'
-		outf='ngramdata/bigrams_'+el.lower()+'.txt'
+		outf='ngramdata/tfidf_bigrams_'+el.lower()+'.txt'
 		big=bigrams(inf,outf)
 		big.strip_punct()
 		big.return_bigrams()

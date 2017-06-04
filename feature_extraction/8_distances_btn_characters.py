@@ -67,8 +67,8 @@ class zscore:
 				name1=self.names[j]
 				name2=self.names[k]
 				#distx=self.euclidean(self.zvectors[name1],self.zvectors[name2])
-				distx=self.cosine(self.zvectors[name1],self.zvectors[name2])
-				#distx=self.euclidean(self.zvectors[name1],self.zvectors[name2])
+				#distx=self.cosine(self.zvectors[name1],self.zvectors[name2])
+				distx=self.euclidean(self.zvectors[name1],self.zvectors[name2])
 				self.distances.append((name1,name2,distx))
 		self.distances.sort(key=lambda tup: tup[2])
 		for el in self.distances:
@@ -102,7 +102,8 @@ class zscore:
 
 #lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 #lx=['Chandler','Joey','Rachel','Monica']
-lx=['Sheldon','Penny','Leonard','Raj','Amy','Bernadette','Monica','Phoebe','Ross','Chandler','Joey','Rachel']
+#lx=['Sheldon','Penny','Leonard','Raj','Amy','Bernadette',
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 zzz=zscore(lx)
 #zzz.print_zscores()
 zzz.measure_distances()

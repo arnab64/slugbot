@@ -64,8 +64,10 @@ class inversedocfreq:
 			print(len(self.idfdx[k].keys()))
 
 	def tfidf(self):
-		for j in range(1):
+		for j in range(6):
 			name=self.names[j]
+			ofname='ngramdata/tfidf_'+name.lower()+'.txt'
+			ofile=open(ofname,'w')
 			fname='ngramdata/tf_'+name.lower()+'.txt'
 			print("reading from",fname)
 			infile=open(fname,'r')
@@ -79,7 +81,9 @@ class inversedocfreq:
 					if self.idfdx[l].get(a,-1)!=-1:
 						#print("got",a,"in",l,'with count',self.idfdx[l][a])
 						count+=1
-				print(a,b,count)
+				#print(a,b,count)
+				tfidfscore=int(b)/count
+				ofile.write(a+"	"+str(tfidfscore)+'\n')
 
 
 				

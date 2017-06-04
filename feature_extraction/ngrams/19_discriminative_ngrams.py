@@ -21,7 +21,7 @@ class discriminative:
 				#self.pool2[(elx[0],elx[1])].append(name)
 
 	def extractunigrams(self,name):
-		fname='ngramdata/cunigrams_'+name.lower()+'.txt'
+		fname='ngramdata/tfidf_'+name.lower()+'.txt'
 		inf=open(fname,'r')
 		inl=inf.readlines()
 		for line in inl:
@@ -73,10 +73,10 @@ class discriminative:
 				#print(alex)
 				ofilexxx.write(pang[0]+"	"+pang[1]+'\n')
 
-	def print_bigrams(self):
+	def print_bigrams(self,top):
 		bigs=[]
 		ofile1=open('ngramdata/friends_bigram_relative_frequencies.txt','w')
-		ofile2=open('ngramdata/friends_discriminative_bigrams_new.txt','w')
+		ofile2=open('ngramdata/friends_tfidf_unigrams.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
@@ -85,7 +85,7 @@ class discriminative:
 		print("numbers are:",len(bigs))
 		count=0
 		print("selecting the top 100 discriminative!")
-		for j in range(100):
+		for j in range(top):
 			holx=bigs[j]
 			bigr=holx[0]
 			bigt=holx[1]
@@ -101,7 +101,7 @@ class discriminative:
 	def print_unigrams(self,top):
 		bigs=[]
 		ofile1=open('ngramdata/friends_unigram_relative_frequencies.txt','w')
-		ofile2=open('ngramdata/friends_discriminative_unigrams.txt','w')
+		ofile2=open('ngramdata/friends_tfidf_unigrams_top100.txt','w')
 		for key in self.pool.keys():
 			elllx=self.pool[key]
 			ofile1.write(str(key)+"	"+str(np.std(elllx))+"	"+str(elllx)+"\n")
@@ -118,5 +118,5 @@ obj=discriminative()
 #lx=['Raj','Leonard','Sheldon','Penny','Bernadette','Amy']
 lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 for el in lx:
-	obj.extractbigrams(el)
-obj.print_bigrams()
+	obj.extractunigrams(el)
+obj.print_unigrams(100)

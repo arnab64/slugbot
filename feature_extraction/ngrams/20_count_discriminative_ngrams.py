@@ -19,14 +19,15 @@ class count_ngrams:
 		self.dblist=[]
 		if ngrams==2:
 			if pos==0:
-				inf=open('intermediate/friends_discriminative_bigrams_new.txt',"r",encoding='utf-8',errors='ignore')
+				inf=open('ngramdata/friends_discriminative_bigrams.txt',"r",encoding='utf-8',errors='ignore')
 			else:
-				inf=open('intermediate/friends_pos_discriminative_bigrams.txt',"r",encoding='utf-8',errors='ignore')
+				inf=open('ngramdata/friends_pos_discriminative_bigrams.txt',"r",encoding='utf-8',errors='ignore')
 		else:
 			if pos==0:
-				inf=open('intermediate/friends_discriminative_unigrams.txt',"r",encoding='utf-8',errors='ignore')
+				#inf=open('ngramdata/friends_discriminative_unigrams_third100.txt',"r",encoding='utf-8',errors='ignore')
+				inf=open('ngramdata/friends_discriminative_unigrams_top100.txt',"r",encoding='utf-8',errors='ignore')
 			else:
-				inf=open('intermediate/friends_pos_discriminative_unigrams.txt',"r",encoding='utf-8',errors='ignore')
+				inf=open('ngramdata/friends_pos_discriminative_unigrams.txt',"r",encoding='utf-8',errors='ignore')
 		if pos==1:
 			limitx=20
 		else:
@@ -78,7 +79,7 @@ class count_ngrams:
 	def count_bigrams(self):		#extracts the bigrams from every line 
 		ofile=open(self.outfile,'w',encoding='utf8')
 		strx=",".join(self.dblist)
-		#ofile.write(strx+'\n')
+		ofile.write(strx+'\n')
 		lenx=len(self.removed)
 		for i in range(lenx):
 			line=self.removed[i] 
@@ -136,25 +137,25 @@ if __name__=="__main__":
 	lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 
 	#word bigrams
-	#print("\nword Bigram vectors!!")
+	print("\nword Bigram vectors!!")
 	for el in lx:
 		print("\nprocessing....",el)
-		inf='character_data/just_'+el.lower()+'.txt'
-		outf='data_central/bigram_vectors_new_'+el.lower()+'.txt'
+		inf='../character_data/just_'+el.lower()+'.txt'
+		outf='ngramdata/bigram_vectors_'+el.lower()+'.txt'
 		big=count_ngrams(inf,outf,2,0)			
 		big.strip_punct()
 		big.count_bigrams()
-
+	
 	#lx=['Sheldon']	#,'Leonard','Penny','Bernadette','Amy','Raj']
-'''	print("\nWord unigram vectors!!")
+	print("\nWord unigram vectors!!")
 #word unigrams	
 	for el in lx:
 		print("\nprocessing....",el)
-		inf='character_data/just_'+el.lower()+'.txt'
-		outf='data_central/tagged/unigram_vectors_'+el.lower()+'.txt'
+		inf='../character_data/just_'+el.lower()+'.txt'
+		outf='ngramdata/unigram_vectors_'+el.lower()+'.txt'
 		big=count_ngrams(inf,outf,1,0)			
 		big.strip_punct()
-		big.count_unigrams()'''
+		big.count_unigrams()
 
 #pos unigrams
 '''	print("\nPOS unigrams!")
