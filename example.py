@@ -17,17 +17,14 @@ l = len(match)
 for i in range(l):
     rematch.append(match[i].strip())   #remove white spaces
 print ('rematch is: ', rematch)
-
+for item in rematch[:]:
+    if item == 'CUT TO:':
+        rematch.remove(item)
+print(rematch)
 
 dic = {rematch.count(x):x for x in rematch}  # Building a dictionary from the list to count and rid of duplicates.
 print ('dic is:', dic)
 a, b = dic.keys(), dic.values()
-for key, item in dic.items():
-  if key < count:
-    del dic[key]
-  continue
-#od = collections.OrderedDict(sorted(dic.items()))
-#print(od)
 
 
 
