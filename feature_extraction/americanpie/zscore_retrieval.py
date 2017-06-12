@@ -33,6 +33,8 @@ class zscore:
 		for name in names:
 			#self.zvectors[name]=self.compute_zvector(self.mean_vectors[name])
 			self.zvectors[name]=self.compute_zvector(self.mean_vectors[name])
+		self.infileyy=open('americanpie.txt','r')
+		self.utterances=self.infileyy.readlines()
 
 	def compute_mv_zdist(self):
 		self.chardx={'Chandler':[],'Joey':[],'Rachel':[]}
@@ -84,6 +86,7 @@ class zscore:
 		return sumx
 
 	def compute_zvector(self,vecx):
+		print("length of self.mnx/vecx",len(self.mnx),len(vecx))
 		subx=np.subtract(self.mnx,vecx) 			#difference from the mean
 		divx1=np.divide(subx,self.sdx)				#divide by the standard deviation
 		divx2=np.absolute(divx1)
@@ -116,32 +119,40 @@ class zscore:
 		distx=usum/(lsqrt*rsqrt)
 		return(1-distx)
 
+	def writeout_utterances(self,uno):
+		line1=self.utterances[uno].strip()
+		self.cfile.write(line1+'\n')
+
 	def testitout_retrieval(self,characterx):
 		#fname='../train_test/friends/testing.txt'
-		fname='../americanpie/americanpie_liwc.txt'
+		fname='americanpie_liwc.txt'
 		ofname2='results/zscore_retrieval.txt'
 		cfilename='results/'+characterx+'_utterances_from_americanpie.txt'
-		cfile=open(cfilename,'w')
+		self.cfile=open(cfilename,'w')
 		ofile2=open(ofname2,'a')
 		infile=open(fname)
-		inlines=infile.readlines()
+		self.characterinlines=infile.readlines()
 		correct=0
 		listx=[]
-		for k in range(len(inlines)):	#len(inlines)):
-			this1=inlines[k]
+		for k in range(len(self.characterinlines)):	#len(inlines)):
+			this1=self.characterinlines[k]
 			this2=this1.split(',')
-			this3=this2[1:-1]
-			character=this2[-1].strip()				#actual character
-			vect=[float(el) for el in this3]
+			#this3=this2[1:-1]
+			#character=this2[-1].strip()				#actual character
+			vect=[float(el) for el in this2]
+			print(k,len(vect))
 			zv=self.compute_zvector(vect)
-			cosdistance1=self.euclidean(self.median_vectors[characterx],vect)
-			cosdistance2=self.euclidean(self.zvectors[characterx],zv)
-			cosdistance3=self.euclidean(self.median_vectors[characterx],vect)
-			listx.append((character,,cosdistance3))
+			cosdistance1=self.euclidean(self.median_vectors[characterx],vect)			#distance from median vector
+			cosdistance2=self.euclidean(self.zvectors[characterx],zv)	
+			cosdistance3=self.euclidean(self.median_vectors[characterx],vect)			#
+			listx.append((k,cosdistance3))
 		listx.sort(key=lambda tup: tup[1])
 		chand=0
 		count=0
 		for el in listx:
+			unumx=el[0]
+			self.writeout_utterances(unumx)
+
 			#cfile.write(el)
 			print(el)
 			pred=el[0]
@@ -201,7 +212,7 @@ class zscore:
 
 #lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 #lx=['Rachel','Monica','Phoebe','Ross','Chandler','Joey']	
-lx=['Chandler']	#,'Joey']	
+lx=['Chandler','Monica']	#,'Joey']	
 #lx=['Raj','Leonard','Sheldon','Penny','Bernadette','Amy']
 zzz=zscore(lx)
 tscr=0

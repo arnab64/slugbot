@@ -3,7 +3,7 @@ import random
 import csv
 
 class traintest:
-	def __init__(self,cnames,instx=1000):		
+	def __init__(self,cnames,instx=0):		
 		self.train=[]
 		self.test=[]
 		self.cnames=cnames
@@ -44,7 +44,9 @@ class traintest:
 			el=self.cnames[j]
 			#fname='../ngrams/ngramdata/unigram_vectors_tfidf_'+el.lower()+'.txt'
 			#fname='../liwc/liwcfeatures/liwc_'+el.lower()+'.txt'
-			fname='../data_central/combined_new_'+el.lower()+'.txt'
+			#fname='../data_central/combined_new_'+el.lower()+'.txt'
+			#fname='../liwc/liwcfeatures/liwc_'+el.lower()+'.txt'
+			fname='../intermediate/liwc_'+el.lower()+'.csv'
 			filex=open(fname,'r',encoding='utf8')
 			flines=filex.readlines()
 			#labels='../liwc/liwcfeatures/liwc_'+el.lower()+'.txt'

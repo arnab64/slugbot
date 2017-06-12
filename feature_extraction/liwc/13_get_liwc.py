@@ -7,7 +7,7 @@ def read_file(f):
 	return inlines
 
 def write_csv(filename, rows, header_fields=None):
-    with open(filename, 'w', encoding="utf8") as csvfile:
+    with open(filename, 'w', encoding="utf8", newline='') as csvfile:
         writer = csv.writer(csvfile)
         if header_fields:
             writer.writerow(header_fields)
@@ -55,9 +55,14 @@ def main(infname,outfname):
 #lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']
 #tbbt=['Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
 
-lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel','Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
+'''
+lx=['Monica','Phoebe','Ross','Chandler','Joey','Rachel']		#,'Raj','Leonard','Sheldon','Penny','Howard','Bernadette','Amy']
 for el in lx:
     print("Processing....",el)
     infname='../character_data/just_'+el.lower()+'.txt'
     outfname='../intermediate/liwc_'+el.lower()+'.csv'
     main(infname,outfname)
+'''
+infname='../americanpie/americanpie.txt'
+ofname='../americanpie/americanpie_liwc.csv'
+main(infname,ofname)
