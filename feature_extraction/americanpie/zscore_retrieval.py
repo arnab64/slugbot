@@ -123,6 +123,13 @@ class zscore:
 		line1=self.utterances[uno].strip()
 		self.cfile.write(line1+'\n')
 
+	def writetofile(self,lx):
+		self.cfile.write(lx+'\n')
+
+	def get_utterance(self,uno):
+		line1=self.utterances[uno].strip()
+		return line1
+
 	def testitout_retrieval(self,characterx):
 		#fname='../train_test/friends/testing.txt'
 		fname='americanpie_liwc.txt'
@@ -146,12 +153,16 @@ class zscore:
 			cosdistance2=self.euclidean(self.zvectors[characterx],zv)	
 			cosdistance3=self.euclidean(self.median_vectors[characterx],vect)			#
 			listx.append((k,cosdistance3))
-		listx.sort(key=lambda tup: tup[1])
+		listx.sort(key=lambda tup: tup[1])		#sorted the utterances wrt their scores
 		chand=0
 		count=0
 		for el in listx:
-			unumx=el[0]
-			self.writeout_utterances(unumx)
+			unumx=el[0]			#this is the utterance ID or serial number
+			score=el[1]			#score of the utterance
+			uttr=self.get_utterance(unumx)
+			utteranceandscore=str(score)+'	'+uttr
+			self.writetofile(utteranceandscore)
+			#self.writeout_utterances(unumx)
 
 			#cfile.write(el)
 			print(el)

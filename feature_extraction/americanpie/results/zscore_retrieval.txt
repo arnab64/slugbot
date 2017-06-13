@@ -3,3 +3,5 @@ Chandler,0.0
 Chandler,0.0
 Chandler,0.0
 Monica,0.0
+Chandler,0.0
+Monica,0.0
